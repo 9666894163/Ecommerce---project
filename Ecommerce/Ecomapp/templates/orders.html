@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+   <div class="border rounded p-4 m-4">
+        <p class="display-4 pl-4 ml-4">Your Orders</p>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sno.</th>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Date</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for objects in object %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><img style="height: 80px;" class="rounded-circle" src="{{objects.item_name.image.url}}" alt=""></td>
+                    <td>{{objects.item_name.name}}</td>
+                    <td>{{objects.date}}</td>
+                    <td>{{objects.item_name.price}}</td>
+                    <td>{{objects.quantity}}</td>
+                    <td>{{objects.item_name.price}} * {{objects.quantity}}</td>
+                    {% if objects.status %}
+                    <td><small class="badge badge-success">Completed</small></td>
+                    {%else%}
+                    <td><small class="badge badge-warning">Pending</small></td>
+                    {% endif %}
+                </tr>
+
+                {% endfor %}
+               
+            </tbody>
+
+        </table>
+       
+   </div>
+</div>
+
+<div>
+    <center>
+        <form action="pay" method="post">
+            {% csrf_token %}
+            <button type="submit">Buy Now</button>
+        </form>
+    </center>
+</div>
+
+{% endblock %}

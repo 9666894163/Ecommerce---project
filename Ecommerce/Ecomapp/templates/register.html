@@ -8,54 +8,118 @@
 
 		<!-- MATERIAL DESIGN ICONIC FONT -->
 		<link rel="stylesheet" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
-		
 		<!-- STYLE CSS -->
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="{% static 'Register/css/style.css' %}">
+		<!-- <link rel="stylesheet" href="{% static 'css/dum.css' %}"> -->
 	</head>
-
 	<body>
-
 		<div class="wrapper" style="background-image: url('images/bg-registration-form-2.jpg');">
 			<div class="inner">
-					<form action="" method = 'post'>
+					<form action="reg" method = 'post'>
 						{% csrf_token %}
-						{{form.as_p}}
-						<button type="submit">Submit</button>
-
+						<!-- {{form.as_p}}
+						<button type="submit">Submit</button> -->
 						<h3>Registration Form</h3>
-					<!-- <div class="form-group">
+						<div class="form-wrapper">
+							<label for="">Username</label>
+							{{form.username}}
+						</div>
 						<div class="form-wrapper">
 							<label for="">First Name</label>
-							<input type="text" class="form-control">
+							{{form.first_name}}
 						</div>
 						<div class="form-wrapper">
 							<label for="">Last Name</label>
-							<input type="text" class="form-control">
+							{{form.last_name}}
 						</div>
-					</div>
-					<div class="form-wrapper">
-						<label for="">Phone number</label>
-						<input type="text" class="form-control">
-					</div>
-					<div class="form-wrapper">
-						<label for="">Email</label>
-						<input type="text" class="form-control">
-					</div>
-					<div class="form-wrapper">
-						<label for="">Password</label>
-						<input type="password" class="form-control">
-					</div>
-					
-					<div class="checkbox">
-						<label>
-							<input type="checkbox"> I caccept the Terms of Use & Privacy Policy.
-							<span class="checkmark"></span>
-						</label>
-					</div>
-					<button>Register Now</button> -->
+						<div class="form-wrapper">
+							<label for="">Email</label>
+							{{form.email}}
+						<div class="form-wrapper">
+							<label for="">Password</label>
+							{{form.password1}}
+						</div>
+						<div class="form-wrapper">
+							<label for="">confirm Password</label>
+							{{form.password2}}
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox"> I caccept the Terms of Use & Privacy Policy.
+								<span class="checkmark"></span>
+							</label>
+						</div>
+						<button>Register Now</button>
 				    </form>
 			</div>
 		</div>
-	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-</html>
+	</body>
+</html> 
+
+ <!-- <body>
+    <body>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 col-xl-9 mx-auto">
+              <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
+                <div class="card-img-left d-none d-md-flex"> -->
+                  <!-- Background image for card set in CSS! -->
+                <!-- </div>
+                <div class="card-body p-4 p-sm-5">
+                  <h5 class="card-title text-center mb-5 fw-light fs-5">Register</h5>
+                  <form action="reg" method="post">
+                      {% csrf_token %}
+      
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="floatingInputUsername" placeholder="myusername" required autofocus>
+                      <label for="floatingInputUsername">Username</label>
+                    </div>
+      
+                    <div class="form-floating mb-3">
+                      <input type="email" class="form-control" id="floatingInputEmail" placeholder="name@example.com">
+                      <label for="floatingInputEmail">Email address</label>
+                    </div>
+      
+                    <hr>
+      
+                    <div class="form-floating mb-3">
+                      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                      <label for="floatingPassword">Password</label>
+                    </div>
+      
+                    <div class="form-floating mb-3">
+                      <input type="password" class="form-control" id="floatingPasswordConfirm" placeholder="Confirm Password">
+                      <label for="floatingPasswordConfirm">Confirm Password</label>
+                    </div>
+      
+                    <div class="d-grid mb-2">
+                      <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit">Register</button>
+                    </div>
+      
+                    <a class="d-block text-center mt-2 small" href="#">Have an account? Sign In</a>
+      
+                    <hr class="my-4">
+      
+                    <div class="d-grid mb-2">
+                      <button class="btn btn-lg btn-google btn-login fw-bold text-uppercase" type="submit">
+                        <i class="fab fa-google me-2"></i> Sign up with Google
+                      </button>
+                    </div>
+      
+                    <div class="d-grid">
+                      <button class="btn btn-lg btn-facebook btn-login fw-bold text-uppercase" type="submit">
+                        <i class="fab fa-facebook-f me-2"></i> Sign up with Facebook
+                      </button>
+                    </div>
+      
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </body>
+    
+</body>
+</html> -->

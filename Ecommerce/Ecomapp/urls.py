@@ -9,7 +9,9 @@ urlpatterns = [
     path('cat',views.category,name = "cat"),
     path('view/<int:id>',views.View_options,name = "view"),
     path('reg',views.Register_form,name ="reg"),
-    path('log',views.Login,name = "log")
+    path('log',views.Login,name = "log"),
+    path('cart/<str:name>',views.cart,name = "cart"),
+    path('pay',views.payment,name = "pay")
 
 ]
 

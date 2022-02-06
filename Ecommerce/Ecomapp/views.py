@@ -1,7 +1,10 @@
+from contextvars import Context
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from numpy import False_, product
 from .models import *
 from .forms import *
 
@@ -12,6 +15,8 @@ from .models import *
 
 # Create your views here.
 
+
+@login_required(login_url='login')
 def Home(request):
 
     prods = Products.objects.all()
@@ -36,7 +41,7 @@ def View_options(request,id):
         'search': product_object
     }
 
-    return render(request,'search.html',context)    
+    return render(request,'search.html',context) 
 
 def Register_form(request):
     # if request.method =='POST':
@@ -55,7 +60,8 @@ def Register_form(request):
         form = Registration_user(request.POST)
         if form.is_valid():
             form.save()
-
+        else:
+            print(form.errors)
     else:
         form = Registration_user()        
     return render(request,'register.html',{'form':form})
@@ -64,12 +70,55 @@ def Login(request):
     if request.method == 'POST':
         U = request.POST['username']
         P = request.POST['password']
-        obj = authenticate(request,username =U,Password = P)
+        obj = authenticate(request,username =U,password = P)
         if obj is not None:
             login(request,obj)
             return redirect('home')
         else:
-            messages.error(request,'something went wrong')
-
+            messages.error(request,'Invalid crediantials')
+            return render(request,'login.html')
     else:
-        return render(request,'login.html')    
+        return render(request,'login.html') 
+
+
+@login_required(login_url='login')
+# def signout(request):
+#     if request.user.is_authenticated:
+#         logout(request)
+#         return redirect('log')
+#     else:
+#         return render(request,'home.html')    
+
+    # logout(request)
+    # messages.info(request,'You have sussefully logout')
+    # return redirect('home.html')
+
+
+def cart(request,name):
+    print(name)
+    print('cart.called')
+    if request.method =='POST':
+        valid_prd = Products.objects.filter(name = name)
+        if valid_prd is not None:
+             ord = Orders()
+             ord.user = request.user
+             ord.order_id = 1
+             ord.item_name = Products.objects.get(name=name)
+
+             #Orders.objects.create(request.user,1,name,False)
+             ord.save()
+             context = {
+                'object':Orders.objects.all()
+            }
+
+    return render(request,'orders.html',context)
+
+def cart_view(request):
+    context = {
+        'count':Orders.objects.filter(user = request.user,status = False).count()
+    }
+    return render(request,'base.html',context) 
+
+def payment(request):
+
+    return render(request,'payment.html')
